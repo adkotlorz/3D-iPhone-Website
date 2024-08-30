@@ -1,8 +1,12 @@
+import { Hero, Highlights, Navbar } from "./components";
+
 const App = () => {
   return (
-    <div className="bg-black min-h-screen w-full">
-      <h1>Hello world!</h1>
-    </div>
+    <main className="bg-black">
+      <Navbar />
+      <Hero />
+      <Highlights />
+    </main>
   );
 };
 
