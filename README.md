@@ -1,9 +1,31 @@
-# React + Vite
+## [Live Preview](https://3-d-i-phone-website.vercel.app/)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# NodeJS & NPM versions
 
-Currently, two official plugins are available:
+NodeJS v.20.12.1
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-# 3D-iPhone-Website
+NPM v 10.5.0
+
+## Dependencies
+
+[Vite](https://vitejs.dev/)
+
+[TailwindCSS](https://tailwindcss.com/)
+
+[ThreeJS](https://threejs.org/)
+
+[GSAP](https://gsap.com/)
+
+## About
+
+Apple iPhone 15 Pro product presentation with 3D Model
+
+## How to?
+
+To set up this project, simply clone on your PC whole code (or download zip package). Unpack it, and drag'n'drop containing folder (or open in Your IDE).
+
+Type in the terminal "npm install" to install all needed dependencies.
+
+After Node Package Manager done his work, type again in the terminal "npm run dev". Local server will start on http://localhost:5173/
+
+Enjoy!
