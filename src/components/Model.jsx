@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import * as THREE from "three";
 import { Canvas } from "@react-three/fiber";
@@ -8,6 +8,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
 import { yellowImg } from "../utils";
+import { animateWithGsapTimeline } from "../utils/animations";
 import { models, sizes } from "../constants";
 
 import ModelView from "./ModelView";
@@ -20,17 +21,32 @@ const Model = () => {
     img: yellowImg,
   });
 
-  //camera control for the model view
   const cameraControlSmall = useRef();
   const cameraControlLarge = useRef();
 
-  //model
   const small = useRef(new THREE.Group());
   const large = useRef(new THREE.Group());
 
-  //rotation
   const [smallRotation, setSmallRotation] = useState(0);
   const [largeRotation, setLargeRotation] = useState(0);
+
+  const tl = gsap.timeline();
+
+  useEffect(() => {
+    if (size === "large") {
+      animateWithGsapTimeline(tl, small, smallRotation, "#view1", "#view2", {
+        transform: "translateX(-100%)",
+        duration: 2,
+      });
+    }
+
+    if (size === "small") {
+      animateWithGsapTimeline(tl, large, largeRotation, "#view2", "#view1", {
+        transform: "translateX(0)",
+        duration: 2,
+      });
+    }
+  }, [size]);
 
   useGSAP(() => {
     gsap.to("#heading", { y: 0, opacity: 1 });
