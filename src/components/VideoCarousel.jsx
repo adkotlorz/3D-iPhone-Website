@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { hightlightsSlides } from "../constants";
 import { pauseImg, playImg, replayImg } from "../utils";
@@ -76,6 +77,7 @@ const VideoCarousel = () => {
   const { isEnd, isLastVideo, startPlay, videoId, isPlaying } = video;
 
   useGSAP(() => {
+    gsap.registerPlugin(ScrollTrigger);
     gsap.to("#slider", {
       transform: `translateX(${-100 * videoId}%)`,
       duration: 2,
@@ -142,10 +144,12 @@ const VideoCarousel = () => {
         anim.restart();
       }
       const animUpdate = () => {
-        anim.progress(
-          videoRef.current[videoId].currentTime /
-            hightlightsSlides[videoId].videoDuration
-        );
+        const videoElement = videoRef.current[videoId];
+        if (videoElement) {
+          anim.progress(
+            videoElement.currentTime / hightlightsSlides[videoId].videoDuration
+          );
+        }
       };
 
       if (isPlaying) {
