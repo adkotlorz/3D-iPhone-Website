@@ -98,19 +98,6 @@ const VideoCarousel = () => {
   }, [isEnd, videoId]);
 
   useEffect(() => {
-    if (loadedData.length > 3) {
-      if (!isPlaying) {
-        videoRef.current[videoId].pause();
-      } else {
-        startPlay && videoRef.current[videoId].play();
-      }
-    }
-  }, [startPlay, videoId, isPlaying, loadedData]);
-
-  const handleLoadedMetadata = (i, e) =>
-    setLoadedData((prevVideo) => [...prevVideo, e]);
-
-  useEffect(() => {
     let currentProgress = 0;
     let span = videoSpanRef.current;
 
@@ -119,7 +106,7 @@ const VideoCarousel = () => {
         onUpdate: () => {
           const progress = Math.ceil(anim.progress() * 100);
 
-          if (progress !== currentProgress) {
+          if (progress != currentProgress) {
             currentProgress = progress;
 
             gsap.to(videoDivRef.current[videoId], {
@@ -170,6 +157,16 @@ const VideoCarousel = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [videoId, startPlay]);
 
+  useEffect(() => {
+    if (loadedData.length > 3) {
+      if (!isPlaying) {
+        videoRef.current[videoId].pause();
+      } else {
+        startPlay && videoRef.current[videoId].play();
+      }
+    }
+  }, [startPlay, videoId, isPlaying, loadedData]);
+
   const handleProcess = (type, i) => {
     switch (type) {
       case "video-end":
@@ -179,35 +176,43 @@ const VideoCarousel = () => {
           videoId: i + 1,
         }));
         break;
+
       case "video-last":
         setVideo((prevVideo) => ({
           ...prevVideo,
           isLastVideo: true,
         }));
         break;
+
       case "video-reset":
         setVideo((prevVideo) => ({
           ...prevVideo,
-          isLastVideo: false,
           videoId: 0,
+          isLastVideo: false,
         }));
         break;
+
       case "play":
         setVideo((prevVideo) => ({
           ...prevVideo,
           isPlaying: !prevVideo.isPlaying,
         }));
         break;
+
       case "pause":
         setVideo((prevVideo) => ({
           ...prevVideo,
           isPlaying: !prevVideo.isPlaying,
         }));
         break;
+
       default:
         return video;
     }
   };
+
+  const handleLoadedMetadata = (i, e) =>
+    setLoadedData((prevVideo) => [...prevVideo, e]);
 
   return (
     <>
