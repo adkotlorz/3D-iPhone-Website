@@ -65,7 +65,7 @@ const Model = () => {
               groupRef={small}
               gsapType="view1"
               controlRef={cameraControlSmall}
-              setRorationState={setSmallRotation}
+              setRotationState={setSmallRotation}
               item={model}
               size={size}
             />
@@ -74,7 +74,7 @@ const Model = () => {
               groupRef={large}
               gsapType="view2"
               controlRef={cameraControlLarge}
-              setRorationState={setLargeRotation}
+              setRotationState={setLargeRotation}
               item={model}
               size={size}
             />
